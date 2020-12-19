@@ -1,4 +1,4 @@
-package com.tylerholzschuh.ToDoApp.config;
+package com.tylerholzschuh.todoapp.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -11,7 +11,7 @@ public class ToDoMvcDispatcherServletInitializer extends AbstractAnnotationConfi
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[] {ToDoConfig.class};
+        return new Class[] {ToDoConfig.class, ToDoSecurityConfig.class};
     }
 
     @Override

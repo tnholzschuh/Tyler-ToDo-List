@@ -1,9 +1,10 @@
-package com.tylerholzschuh.ToDoApp.services;
+package com.tylerholzschuh.todoapp.services;
 
-import com.tylerholzschuh.ToDoApp.entities.ToDoItem;
-import com.tylerholzschuh.ToDoApp.repositories.ToDoItemRepository;
+import com.tylerholzschuh.todoapp.entities.ToDoItem;
+import com.tylerholzschuh.todoapp.repositories.ToDoItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class ToDoItemService {
         this.toDoItemRepository = toDoItemRepository;
     }
 
+    @Transactional
     public List<ToDoItem> getToDoItemsByUsername(String username) {
         return toDoItemRepository.getToDoItemsByUsername(username);
     }

@@ -1,6 +1,6 @@
-package com.tylerholzschuh.ToDoApp.controllers;
+package com.tylerholzschuh.todoapp.controllers;
 
-import com.tylerholzschuh.ToDoApp.services.ToDoItemService;
+import com.tylerholzschuh.todoapp.services.ToDoItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +18,7 @@ public class MainController {
 
     @GetMapping("/to-do-items")
     public String toDoItems(Model model) {
-        model.addAttribute("toDoItems", toDoItemService.getToDoItemsByUsername("hello"));
+        model.addAttribute("toDoItems", toDoItemService.getToDoItemsByUsername("tyler"));
         return "to-do-items";
     }
 

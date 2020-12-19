@@ -1,4 +1,4 @@
-package com.tylerholzschuh.ToDoApp.config;
+package com.tylerholzschuh.todoapp.config;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 
