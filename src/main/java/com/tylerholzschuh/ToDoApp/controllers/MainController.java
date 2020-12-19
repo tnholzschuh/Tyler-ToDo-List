@@ -6,9 +6,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 
-    @GetMapping("/home")
-    public String home() {
+    @GetMapping("/to-do-items")
+    public String toDoItems() {
 //        System.out.println(user);
-        return "index";
+        return "to-do-items";
+    }
+
+    @GetMapping("/")
+    public String home() {
+        return "redirect:/to-do-items";
     }
 }
