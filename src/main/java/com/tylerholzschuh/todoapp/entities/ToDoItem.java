@@ -21,8 +21,7 @@ public class ToDoItem {
     public ToDoItem() {
     }
 
-    public ToDoItem(long id, String username, String item) {
-        this.id = id;
+    public ToDoItem(String username, String item) {
         this.item = item;
         this.username = username;
     }

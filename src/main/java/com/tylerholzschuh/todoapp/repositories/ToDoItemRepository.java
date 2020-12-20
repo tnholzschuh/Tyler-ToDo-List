@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class ToDoItemRepository {
@@ -27,7 +28,20 @@ public class ToDoItemRepository {
         this.sessionFactory = sessionFactory;
     }
 
+    public Optional<ToDoItem> getToDoItemByID(String username, long id) {
+        Session session = sessionFactory.getCurrentSession();
 
+        Query<ToDoItem> query = session.createQuery("from ToDoItem where username=:username AND id=:id",
+                ToDoItem.class);
+        query.setParameter("username", username);
+        query.setParameter("id", id);
+
+        Optional<ToDoItem> toDoItem;
+
+        toDoItem = Optional.ofNullable(query.getSingleResult());
+
+        return toDoItem;
+    }
 
     public List<ToDoItem> getToDoItemsByUsername(String username) {
         Session session = sessionFactory.getCurrentSession();
@@ -36,20 +50,29 @@ public class ToDoItemRepository {
                 ToDoItem.class);
         query.setParameter("username", username);
 
-        @SuppressWarnings(value = "unchecked")
         List<ToDoItem> toDoItems = null;
 
-        // System.out.println(query.getSingleResult().getItem());
-
         try {
-            toDoItems = (List<ToDoItem>) query.getResultList();
+            toDoItems = query.getResultList();
         } catch (Exception e) {
             toDoItems = new ArrayList<ToDoItem>();
         }
 
-        System.out.println(toDoItems.get(0));
-
         return toDoItems;
+    }
+
+    public void addOrUpdateToDoItem(ToDoItem toDoItem) {
+        Session session = sessionFactory.getCurrentSession();
+        session.saveOrUpdate(toDoItem);
+    }
+
+    public void deleteToDoItemById(String username, long id) {
+        Session session = sessionFactory.getCurrentSession();
+        String hql = "delete from ToDoItem where id=:id AND username=:username";
+        Query query = session.createQuery(hql);
+        query.setParameter("username", username);
+        query.setParameter("id", id);
+        query.executeUpdate();
     }
 
 //    public void updateToDoItem(String username, int id) {
