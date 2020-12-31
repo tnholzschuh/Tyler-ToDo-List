@@ -22,15 +22,11 @@ public class ToDoController {
         this.toDoItemService = toDoItemService;
     }
 
-    @GetMapping("/login-page")
-    public String loginPage() {
-        return "login";
-    }
 
 
     @GetMapping("/todo-items")
-    public String toDoItems(Model model) {
-        model.addAttribute("toDoItems", toDoItemService.getToDoItemsByUsername("tyler"));
+    public String toDoItems(Authentication authentication, Model model) {
+        model.addAttribute("toDoItems", toDoItemService.getToDoItemsByUsername(authentication.getName()));
         model.addAttribute("updateID", -1);
         return "todo-items";
     }
@@ -56,8 +52,8 @@ public class ToDoController {
     }
 
     @GetMapping("/show-update-todo-item/{id}")
-    public String showUpdateToDoItem(@PathVariable("id") long id, Model model) {
-        model.addAttribute("toDoItems", toDoItemService.getToDoItemsByUsername("tyler"));
+    public String showUpdateToDoItem(@PathVariable("id") long id, Authentication authentication, Model model) {
+        model.addAttribute("toDoItems", toDoItemService.getToDoItemsByUsername(authentication.getName()));
         model.addAttribute("updateID", id);
         return "todo-items";
     }
@@ -65,7 +61,11 @@ public class ToDoController {
 
     @GetMapping("/")
     public String home() {
-        return "redirect:/todo-items";
+        if (isAuthenticated()) {
+            return "redirect:/todo-items";
+        } else {
+            return "redirect:/login-page";
+        }
     }
 
     private boolean isAuthenticated() {

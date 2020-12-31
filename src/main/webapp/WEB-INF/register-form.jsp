@@ -4,13 +4,13 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Please sign in</title>
+    <title>Please register</title>
   </head>
   <body>
     <div>
-      <c:url var="authenticate_user_url" value="authenticate-user" />
-      <form:form method="POST" action="${authenticate_user_url}" modelAttribute="toDoUser">
-        <h2>Please sign in</h2>
+      <c:url var="register_url" value="register" />
+      <form:form method="POST" action="${register_url}" modelAttribute="toDoUser">
+        <h2>Please register</h2>
         <p>
           <label for="username">Username</label>
           <form:input
@@ -30,12 +30,10 @@
             placeholder="Password"
             required="required"/>
         </p>
-        <button type="submit">Sign in</button>
+        <button type="submit">Register</button>
       </form:form>
     </div>
 
-    <br/>
-    <c:url var="register_form_url" value="register-form" />
-    <h3> Or <a href="${register_form_url}"> register.</a></h3>
+
   </body>
 </html>
